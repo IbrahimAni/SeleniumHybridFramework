@@ -5,34 +5,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class BrowserFactory {
+    static WebDriverWait wait;
+    static ChromeOptions chromeOptions = new ChromeOptions();
+
+    @BeforeClass
     public static WebDriver startApplication(WebDriver driver, String browserName, String appURL){
         if(browserName.equalsIgnoreCase("chrome")){
-            System.setProperty("s","s");
-            driver = new ChromeDriver();
-            driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(chromeOptions);
         }	else if(browserName.equalsIgnoreCase("firefox")){
-            System.setProperty("", "");
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         }	else if(browserName.equalsIgnoreCase("IE")){
-            System.setProperty("", "");
+            WebDriverManager.iedriver().setup();
             driver = new InternetExplorerDriver();
         }	else{
             System.out.println("We do not support this browser");
         }
 
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
         driver.get(appURL);
-        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         return driver;
     }
 
+    @AfterClass
     public static void quitBrowser(WebDriver driver){
         driver.quit();
     }

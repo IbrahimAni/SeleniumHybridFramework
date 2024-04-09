@@ -119,6 +119,17 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.7.0</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>4.17.0</version>
+        </dependency>
 
     </dependencies>
 </project>
