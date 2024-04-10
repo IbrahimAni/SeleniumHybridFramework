@@ -1,8 +1,12 @@
 package com.automation.testcases;
 
 import com.automation.pages.Homepage;
+import com.automation.utilities.ExcelScript;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class HomePageTest extends BaseClass{
     @BeforeClass
@@ -15,20 +19,25 @@ public class HomePageTest extends BaseClass{
         homepage.verifyLogoIsDisplayed();
     }
 
-    @Test
-    public void verifySearchFunctionality() {
-        homepage.enterSearchText("Apple MacBook Pro 13-inch");
+    @Test(dataProvider = "searchData")
+    public void verifySearchFunctionality(String searchText) {
+        homepage.enterSearchText(searchText);
         homepage.clickSearchBtn();
     }
 
-//    @Test
-//    public void verifySearchResults() {
-//        homepage.enterSearchText("Apple MacBook Pro 13-inch");
-//        homepage.clickSearchBtn();
-//    }
-//
-//    @Test
-//    public void verifyRegisterLink() {
-//        homepage.clickRegisterBtn();
-//    }
+    @DataProvider(name = "searchData")
+    private String[][] searchInputData() throws IOException {
+        int rowCount = ExcelScript.getRowCount(filePath, "search_data");
+        int cellCount = ExcelScript.getCellCount(filePath, "search_data", rowCount);
+
+        String[][] searchItems = new String[rowCount][cellCount];
+
+        for (int i = 1; i <= rowCount; i++) {
+            for (int j = 0; j < cellCount; j++) {
+                searchItems[i-1][j] = ExcelScript.getCellData(filePath, "search_data", i, j);
+            }
+        }
+
+        return searchItems;
+    }
 }

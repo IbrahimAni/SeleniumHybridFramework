@@ -7,16 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 
 import java.time.Duration;
 
 public class BrowserFactory {
-    static WebDriverWait wait;
-    static ChromeOptions chromeOptions = new ChromeOptions();
+    protected static WebDriverWait wait;
+    private static final ChromeOptions chromeOptions = new ChromeOptions();
 
-    @BeforeClass
     public static WebDriver startApplication(WebDriver driver, String browserName, String appURL){
         if(browserName.equalsIgnoreCase("chrome")){
             WebDriverManager.chromedriver().setup();
@@ -37,7 +34,6 @@ public class BrowserFactory {
         return driver;
     }
 
-    @AfterClass
     public static void quitBrowser(WebDriver driver){
         driver.quit();
     }

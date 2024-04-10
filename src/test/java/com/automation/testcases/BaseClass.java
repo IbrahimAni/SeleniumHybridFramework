@@ -6,8 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.File;
+
 public class BaseClass extends BasePage {
     public WebDriver driver;
+
+    String filePath = System.getProperty("user.dir")+ File.separator + "src/test/java/com/automation/testdata/automationdata.xlsx";
 
     @BeforeClass
     public void setup() {
