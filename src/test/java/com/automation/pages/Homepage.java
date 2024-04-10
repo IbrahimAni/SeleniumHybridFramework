@@ -1,5 +1,6 @@
 package com.automation.pages;
 
+import com.automation.utilities.Logs;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,10 +27,12 @@ public class Homepage {
 
     public void clickSearchBtn() {
         searchBtn.click();
+        Logs.logInfo("Search button clicked.");
     }
 
     public void clickRegisterBtn() {
         registerBtn.click();
+        Logs.logInfo("Register button clicked.");
     }
 
     public void verifyLogoIsDisplayed() {
