@@ -1,6 +1,6 @@
 package com.automation.pages;
 
-import com.automation.utilities.Logs;
+import com.automation.utilities.logutils.Logs;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +33,7 @@ public class Homepage {
     public void clickRegisterBtn() {
         registerBtn.click();
         Logs.logInfo("Register button clicked.");
+        Logs.logError("Register button unclickable.");
     }
 
     public void verifyLogoIsDisplayed() {

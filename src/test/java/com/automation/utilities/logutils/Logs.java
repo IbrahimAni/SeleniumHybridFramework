@@ -1,4 +1,4 @@
-package com.automation.utilities;
+package com.automation.utilities.logutils;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Logs {
     public static Logger logger;
-    static String log4jFilePath = System.getProperty("user.dir")+ File.separator+ "src/test/java/com/automation/utilities/log4j.properties";
+    static String log4jFilePath = System.getProperty("user.dir")+ File.separator+ "src/test/java/com/automation/utilities/logutils/log4j.properties";
 
     public Logs() {
         logger = Logger.getLogger(Logs.class);
