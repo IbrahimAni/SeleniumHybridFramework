@@ -2,6 +2,7 @@ package com.automation.testcases;
 
 import com.automation.pages.Homepage;
 import com.automation.utilities.ExcelScript;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,20 +10,25 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class HomePageTest extends BaseClass{
+    private Homepage homepage;
+
     @BeforeClass
     public void initialize() {
         homepage = new Homepage(driver);
     }
 
     @Test
-    public void verifyHomepageLogoDisplayed() {
+    public void verifyHomepageLogoDisplayed() throws IOException {
         homepage.verifyLogoIsDisplayed();
+        takeScreenShot("verifyHomepageLogoDisplayed");
     }
 
-    @Test(dataProvider = "searchData")
-    public void verifySearchFunctionality(String searchText) {
+    @Test(dataProvider = "searchData", description = "User can search for items on the homepage.")
+    public void verifySearchFunctionality(String searchText) throws IOException {
         homepage.enterSearchText(searchText);
         homepage.clickSearchBtn();
+
+        takeScreenShot("verifySearchFunctionality");
     }
 
     @DataProvider(name = "searchData")

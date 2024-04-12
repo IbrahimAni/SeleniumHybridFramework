@@ -2,14 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="seleniumHybridFramework">
-<!--    <listeners>-->
-<!--        <listener class-name="" />-->
-<!--    </listeners>-->
+    <listeners>
+        <listener class-name="com.automation.utilities.reportutils.ExtentReport" />
+    </listeners>
     <test  name="Selenium Hybrid Framework Test">
         <classes>
             <class name="com.automation.testcases.HomePageTest">
                 <methods>
-                    <include name="searchTest"/>
+                    <include name="verifyHomepageLogoDisplayed"/>
+                    <include name="verifySearchFunctionality"/>
                 </methods>
             </class>
         </classes>

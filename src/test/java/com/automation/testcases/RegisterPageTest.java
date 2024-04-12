@@ -5,6 +5,9 @@ import com.automation.pages.RegisterPage;
 import org.testng.annotations.BeforeClass;
 
 public class RegisterPageTest extends BaseClass {
+    private Homepage homepage;
+    private RegisterPage registerPage;
+
     @BeforeClass
     public void initialize() {
         homepage = new Homepage(driver);

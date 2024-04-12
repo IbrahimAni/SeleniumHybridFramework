@@ -1,13 +1,16 @@
 package com.automation.pages;
 
 import com.automation.utilities.logutils.Logs;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Homepage {
+public class Homepage extends BasePage{
     WebDriver driver;
+    Logger logger = Logger.getLogger(Homepage.class);
 
     public Homepage(WebDriver driver) {
         this.driver = driver;
@@ -27,13 +30,13 @@ public class Homepage {
 
     public void clickSearchBtn() {
         searchBtn.click();
-        Logs.logInfo("Search button clicked.");
+        logger.info("Search button clicked.");
     }
 
     public void clickRegisterBtn() {
         registerBtn.click();
-        Logs.logInfo("Register button clicked.");
-        Logs.logError("Register button unclickable.");
+        logger.info("Register button clicked.");
+        logger.error("Register button unclickable.");
     }
 
     public void verifyLogoIsDisplayed() {
