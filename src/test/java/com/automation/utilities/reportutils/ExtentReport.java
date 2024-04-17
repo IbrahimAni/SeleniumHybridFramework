@@ -77,6 +77,43 @@ public class ExtentReport extends TestListenerAdapter {
     }
 
     @Override
+    public void onTestFailure(ITestResult tr){
+        ExtentTest extentTest = test.get().fail(MarkupHelper.createLabel(tr.getMethod().getMethodName(), ExtentColor.RED));
+
+        // Add test description, if available
+        if (tr.getMethod().getDescription() != null) {
+            extentTest.info("Description: " + tr.getMethod().getDescription());
+        }
+
+        // Add categories
+        String[] categories = tr.getMethod().getGroups();
+        if (categories.length > 0) {
+            extentTest.assignCategory(categories);
+        }
+
+        // Attach screenshot
+        attachScreenshot(tr.getName(), Status.FAIL);
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult tr) {
+        ExtentTest extentTest = test.get().skip(MarkupHelper.createLabel(tr.getMethod().getMethodName(), ExtentColor.ORANGE));
+
+        // Log the reason for skipping the test
+        if (tr.getThrowable() != null) {
+            extentTest.log(Status.SKIP, "Test skipped due to: " + tr.getThrowable().getMessage());
+        } else {
+            extentTest.log(Status.SKIP, "Test skipped");
+        }
+
+        // Add category annotation, if any
+        String[] categories = tr.getMethod().getGroups();
+        if (categories.length > 0) {
+            extentTest.assignCategory(categories);
+        }
+    }
+
+    @Override
     public void onFinish(ITestContext testContext) {
         extent.flush();
     }
